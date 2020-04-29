@@ -5,9 +5,51 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #C8CDDE;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+/* @keyframes haloAnim{
+  0%{
+    opacity:0;
+  }
+  10%{
+    opacity:1
+  } 
+  100%{
+    opacity:1;
+  }
+};
+
+.cat-card .halodiv{
+  position:absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  height:100%;
+  width:100%;
+  background: red;
+   opacity:0;
+  border:1px solid #02CC62;
+  transition:all .3s;
+  border-radius:15px;
+}
+.cat-card:hover .halodiv{
+  animation-name: haloAnime;
+} */
+
+/* .cat1{
+  position:absolute;
+  top:-1%;
+  left:-5%;
+  transform: rotateZ(-30deg);
+} */
+.cat2{
+
 }
