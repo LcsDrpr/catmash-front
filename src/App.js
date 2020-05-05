@@ -6,19 +6,7 @@ import Navigation from './Components/Navigation/Navigation';
 
 
 
-
-
 const App = () => {
-
-  // const chatList = data.map((chat) => {
-
-  //   nmbVote = nbmVote + chat.score;
-  //   return(
-    
-  //   <li> Nom du chat = {chat.name}</li>
-  //   )
-  //   }
-  // );
 
   return (
     <div className="App">

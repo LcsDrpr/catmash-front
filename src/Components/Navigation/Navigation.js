@@ -5,15 +5,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Screens
 import Home from '../Screens/Home';
-import Introduction from '../Screens/Introduction';
+//import Introduction from '../Screens/Introduction';
 
 const Navigation = () =>{
 
     return(
         <Router>
             <Switch>
-                <Route exact path='/' exact component={Introduction}/>
-                <Route exact path='/home' component={Home}/>
+                <Route exact path='/' exact component={Home}/>
+                {/* <Route exact path='/home' component={Home}/> */}
             </Switch>
         </Router>
 

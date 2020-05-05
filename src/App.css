@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* @keyframes show{
+  0%{
+      opacity:0;
+  }
+  100%{
+      opacity:1important;
+  }
+
+}; */
+
+/* .cat-card {
+  opacity:0;
+  animation-name: show;
+  animation-duration: 0.4;
+  animation-timing-function: ease;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+} */

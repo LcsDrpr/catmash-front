@@ -18,7 +18,18 @@ const useStyles = createUseStyles({
     display:'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    position:'relative',
+
+    "& h3":{
+      position:'absolute',
+      left:'50%',
+      transform:'translateX(-50%)',
+      top:'25px',
+      fontSize:'14px',
+      fontStyle:'italic'
+    }
   },
+
 
 });
 
@@ -41,31 +52,28 @@ const Home = () => {
     score: null
   });
 
+    const [openRanking, setOpenRanking]=useState(false);
+
+    const open = ()=>{
+      setOpenRanking(!openRanking);
+    }
+
+
     const catListSet = (n)=>{
       setChats(n);
-      console.log('cat function : ',n);
     }
-    console.log("les chats state : ", chats);
 
     let cat1Score = cat1.score;
     const addCat1Point = ()=>{
       setCat1({...cat1, score : cat1Score+1});
-      console.log(cat1);
-      //updateWinningCat(cat1);
       updateWinningCat(cat1);
     }
   
     let cat2Score = cat2.score;
     const addCat2Point = ()=>{
       setCat2({...cat2, score : cat2Score+1});
-      console.log(cat2);
-      //updateWinningCat(cat2);
       updateWinningCat(cat2);
-      //chooseCats();
     }
-
-
-
 
       const getCats = async () => {
         const settings = {
@@ -82,8 +90,6 @@ const Home = () => {
             const data = await fetchResponse.json();
             if (data.result) {
                 console.log("FETCH RESULT CATS --->", data);
-                //setChats(data.data);
-                //setChatsCopy(data.data);
                 chooseCats(data.data);
                 count(data.data);
                 catListSet(data.data);
@@ -96,7 +102,6 @@ const Home = () => {
 
       const updateWinningCat = async chatWin => {
 
-        console.log("LE CHAT GAGNANT : ",chatWin);
         let chatWinId = chatWin.id;
 
         const updatedCat = {
@@ -122,9 +127,9 @@ const Home = () => {
           );
             const data = await fetchResponse.json();
             if (data.result) {
-              console.log("CHAUD PATATE : ", data);
               chooseCats(data.data);
               count(data.data);
+              catListSet(data.data);
             }
           
         } catch (err) {
@@ -146,8 +151,6 @@ const Home = () => {
         setCat2({...cat2, id: chats[nmbCat2]._id, url: chatsCopy[nmbCat2].url, score: chatsCopy[nmbCat2].score == null ? 0 : chatsCopy[nmbCat2].score});
       
       }
-      console.log('CHAT 1 : ',cat1);
-      console.log('CHAT 2 : ',cat2);
 
 
 
@@ -155,21 +158,13 @@ const Home = () => {
       let nmbVote = 0;
       const count = (chats) => {
         for(var i=0; i <chats.length; i++){
-          console.log("chaque score : ", chats[i].score);
           nmbVote = nmbVote + (chats[i].score == null ? 0 : chats[i].score);
         }
         setCountCat(nmbVote);
       }
       
 
-
-        const rankingList = chats.map((chat,i)=>{
-          return <Ranking link = {chat.url} score = {chat.score}  />
-        });
-
-  
-
-        //console.log(rankingList);
+        
 
 
       useEffect(()=>{
@@ -179,9 +174,15 @@ const Home = () => {
     return(
       <div className={classes.container}>
           <Header
-           nmbVote = {countCat}
+            nmbVote = {countCat}
+            onClick={open}
           />
+          <Ranking data= {chats} open={openRanking}/>
+
           <div className={classes.content}>
+
+              <h3>"... miaulera bien qui miaulera le dernier ..."</h3>
+
               <Cat
               type='cat1'
               urlImg = {cat1.url}
@@ -196,13 +197,7 @@ const Home = () => {
               />
 
           </div>
-          { chats &&
-            <div>
-              coucou
-            { rankingList }
-
-            </div>
-          }
+ 
         </div>
 
       );
