@@ -1,90 +1,12 @@
 import React, {useState,Fragment} from 'react';
-import {createUseStyles} from 'react-jss'
 import Img from 'react-image';
 
-
-const useStyles = createUseStyles({
-
-    ranking:{
-        position:'absolute',
-        zIndex:'-10',
-        left:0,
-        transform: 'translateY(-480px)',
-        background:'white',
-        borderRadius:'0px 0px 15px 15px',
-        maxWidth: '300px',
-        maxHeight:'400px',
-        overflow:'scroll',
-        padding:'10px',
-        transition:'all 0.5s ease',
-
-        '&>p':{
-            marginBottom:'10px',
-        },
-
-        '& ul':{
-            padding:0,
-            paddingLeft: '15px',
-
-        },
-
-        '& li':{
-            padding:'10px 0',
-            paddingLeft:'60px',
-            listStyle:'none',
-            display:'flex',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-
-            '& svg':{
-                height:'30px',
-                width:'auto',
-            },
-
-            '& img':{
-                maxHeight:'50px',
-                width:'auto',
-                marginRight:'10px',
-            },
-
-            '&$first, &$second, &$third':{
-                paddingLeft:'0px',
-                '& svg':{
-                    marginRight:'30px',
-                }
-            },
-
-        }
-    },
-    open:{
-        //top:'80px',
-        transform:'translateY(0px)',
-    },
-
-    first:{
-    },
-
-    second:{
-
-    },
-
-    third:{
-
-    },
-    title:{
-        textTransform:'uppercase',
-        fontWeight:'bold',
-    }
-
-
-})
-
-
+import "./ranking.scss";
 
 
 const Ranking = props => {
+
     const { data,link,score,open, ...otherProps } = props;
-    const classes = useStyles(props);
 
     data.sort(function(a, b){
         return b.score - a.score;
@@ -99,7 +21,7 @@ const Ranking = props => {
         if(i == 1){
             color = "#DFDADA";
         }
-        if(i == 2){
+        if(i == 2){ 
             color="#E49D5F";
         }
 
@@ -113,8 +35,8 @@ const Ranking = props => {
         </g>
     </svg>
 
-        return <li className={`${i == 0 && classes.first} ${i == 1 && classes.second} ${i== 2 && classes.third}`}>
-                {i == 0 ? cup : (i == 1?  cup : (i == 2 && cup) )}
+        return <li className={`${i == 0 && 'first'} ${i == 1 && 'second'} ${i== 2 && 'third'}`}>
+                {i == 0 ? cup : (i == 1?  cup : (i == 2 && cup))}
                 <Img src={chat.url} alt={chat._id}/>
                 <p>{chat.score != null ? chat.score : 0} votes</p>
             </li>
@@ -124,8 +46,8 @@ const Ranking = props => {
 
     return (
 
-        <div className={`${classes.ranking} ${open == true && classes.open}`}>
-            <p className={classes.title}>Classement</p>
+        <div className={`ranking ${open == true && 'open'}`}>
+            <p className='title'>Classement</p>
             <ul>
                 {rankingList}
             </ul>

@@ -1,0 +1,136 @@
+.header{
+    height:80px;
+    background:#1B2236;
+    display: flex;
+    align-items: center;
+
+    position:relative;
+    z-index:5;
+
+    .rankingButton{
+        position:relative;
+        display:flex;
+        margin:0;
+        margin-right:20px;
+        padding:15px;
+        border-radius:8px;
+        transition: all .3s ease;
+
+        &::before{
+            content:'';
+            display:block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            border: solid 1px white;
+            border-radius: 8px;
+            transition: all .3s ease;
+        }
+        &:hover{
+            background-color:rgba(255,255,255,0.7);
+            &::before{
+                left: -15px;
+                right: -15px;
+                bottom: -15px;
+                top: -15px;
+                opacity: 0;
+            }
+        }
+        & p{
+            padding:0;
+            margin:0;
+            color:white;
+            font-family:'Roboto';
+            font-size:18px
+        }
+        & svg{
+            margin-left: 10px;
+            transition:all 0.3s ease;
+        }
+
+        //variant
+        &.openSvg{
+
+            & svg{
+                transform: rotate(90deg);
+            }
+
+        }
+    }
+
+    &.desktop{
+        padding-left:50px;
+        padding-right:50px;
+    
+        & h1{
+            position:absolute;
+            right:20px;
+            margin:0;
+            font-size:45px;
+            font-family:'Roboto';
+            color:white;
+        }
+    
+        &>p{
+            margin:0;
+            padding:0;
+            color:white;
+            font-size:20px;
+            font-family:'Roboto';
+        }
+    
+        
+
+    }
+
+
+    &.responsive{
+
+        padding-left:25px;
+        padding-right:25px;
+            
+        & h1{
+            margin:0;
+            font-size:45px;
+            font-family:'Roboto';
+            color:white;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            @media screen and (max-width: 500px) {
+                position:initial;
+                transform:initial;
+                font-size:20px;
+            }
+        }
+    
+        &>p{
+            position:absolute;
+            right:25px;
+            margin:0;
+            padding:0;
+            color:white;
+            font-size:20px;
+            font-family:'Roboto';
+            @media screen and (max-width: 500px) {
+                //right:20px;
+                font-size:14px;
+            }
+        }
+        .rankingButton{
+            @media screen and (max-width: 500px) {
+                padding:10px;
+                p{
+                    font-size:14px;
+                }
+                svg{
+                    height:18px
+                }
+            }
+        }
+
+    }
+
+}

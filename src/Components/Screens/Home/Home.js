@@ -1,49 +1,26 @@
 import React, {useState, useEffect, Fragment} from 'react';
-import {createUseStyles} from 'react-jss'
 
 //import component
-import Cat from '../SimpleComponents/Cat';
-import Header from '../SimpleComponents/Header';
-import Ranking from '../SimpleComponents/Ranking';
+import Cat from '../../SimpleComponents/Cats/Cat';
+import Header from '../../SimpleComponents/Header/Header';
+import Ranking from '../../SimpleComponents/Ranking/Ranking';
 
 //url Back
-import { url } from '../../Config/ConnectUrl';
+import { url } from '../../../Config/ConnectUrl';
 
-const useStyles = createUseStyles({
-
-  content:{
-    maxWidth:'1024px',
-    height:'100vh',
-    margin:"0 auto",
-    display:'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position:'relative',
-
-    "& h3":{
-      position:'absolute',
-      left:'50%',
-      transform:'translateX(-50%)',
-      top:'25px',
-      fontSize:'14px',
-      fontStyle:'italic'
-    }
-  },
-
-
-});
-
+//style
+import "./home.scss";
 
 
 const Home = () => {
-  const classes = useStyles();
 
   const [chats,setChats] = useState([]);
+  const [winningCat, setWinningCat] = useState([]);
 
   const [cat1, setCat1] = useState({
-      id: null,
-      url: null,
-      score: null
+    id: null,
+    url: null,
+    score: null
   });
     
   const [cat2, setCat2] = useState({
@@ -51,28 +28,37 @@ const Home = () => {
     url: null,
     score: null
   });
+  
+  const [openRanking, setOpenRanking]=useState(false);
 
-    const [openRanking, setOpenRanking]=useState(false);
-
-    const open = ()=>{
-      setOpenRanking(!openRanking);
-    }
+  const open = ()=>{
+    setOpenRanking(!openRanking);
+  }
 
 
-    const catListSet = (n)=>{
-      setChats(n);
-    }
+  const catListSet = (n)=>{
+    setChats(n);
+  }
 
-    let cat1Score = cat1.score;
-    const addCat1Point = ()=>{
-      setCat1({...cat1, score : cat1Score+1});
-      updateWinningCat(cat1);
-    }
+  //  const winningCatSet = async(n)=>{
+
+  //   await setWinningCat(n);
+  //   //console.log(winningCat);
+
+  //  }
+
+  let cat1Score = cat1.score;
+  const addCat1Point = async ()=>{
+    setCat1({...cat1, score : cat1Score+1});
+    updateWinningCat(cat1);
+    //await winningCatSet(cat1);
+  }
   
     let cat2Score = cat2.score;
-    const addCat2Point = ()=>{
+    const addCat2Point = async ()=>{
       setCat2({...cat2, score : cat2Score+1});
       updateWinningCat(cat2);
+      //await winningCatSet(cat2);
     }
 
       const getCats = async () => {
@@ -122,7 +108,7 @@ const Home = () => {
         };
         try {
           const fetchResponse = await fetch(
-            `${url}/cats/${chatWinId}/updateCat`,
+            `${url}/cats/cat`,
             settings
           );
             const data = await fetchResponse.json();
@@ -134,6 +120,7 @@ const Home = () => {
           
         } catch (err) {
           console.log('ERROR FETCH UpdateCat--->', err);
+          console.log('chat win id : ',chatWinId);
         }
 
       }
@@ -165,32 +152,37 @@ const Home = () => {
       
 
         
-
-
       useEffect(()=>{
         getCats();
-      },[])
+      },[]);
+
+
 
     return(
-      <div className={classes.container}>
+      <div className='container'>
           <Header
             nmbVote = {countCat}
             onClick={open}
           />
           <Ranking data= {chats} open={openRanking}/>
+          <Fragment>
+            <h3>"... miaulera bien qui miaulera le dernier ..."</h3>
+          </Fragment>
 
-          <div className={classes.content}>
+          <div className='content'>
 
-              <h3>"... miaulera bien qui miaulera le dernier ..."</h3>
+              
 
               <Cat
-              type='cat1'
-              urlImg = {cat1.url}
-              score ={cat1.score}
-              onClick = {addCat1Point}
+                type='cat1'
+                idCat = {cat1.id}
+                urlImg = {cat1.url}
+                score ={cat1.score}
+                onClick = {addCat1Point}
               />
               <Cat
                   type='cat2'
+                  idCat = {cat2.id}
                   urlImg = {cat2.url}
                   score ={cat2.score}
                   onClick = {addCat2Point}

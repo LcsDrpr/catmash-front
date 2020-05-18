@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Screens
-import Home from '../Screens/Home';
+import Home from '../Screens/Home/Home';
 //import Introduction from '../Screens/Introduction';
 
 const Navigation = () =>{
