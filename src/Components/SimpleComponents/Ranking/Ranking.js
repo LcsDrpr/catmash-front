@@ -37,7 +37,8 @@ const Ranking = props => {
 
         return <li className={`${i == 0 && 'first'} ${i == 1 && 'second'} ${i== 2 && 'third'}`}>
                 {i == 0 ? cup : (i == 1?  cup : (i == 2 && cup))}
-                <Img src={chat.url} alt={chat._id}/>
+                {/* <Img src={chat.url} alt={chat._id}/> */}
+                <div className={'image'} alt={chat._id} style={{backgroundImage:`url(${chat.url})`}}></div>
                 <p>{chat.score != null ? chat.score : 0} votes</p>
             </li>
             

@@ -60,7 +60,17 @@
 
     }
 
-    img{
+    // img{
+    //     z-index:1;
+    //     height:auto;
+    //     max-width: 400px;
+    //     position:absolute;
+    //     left:50%;
+    //     top:50%;
+    //     transform:translateX(-50%) translateY(-50%);
+    // }
+
+    .image{
         z-index:1;
         height:auto;
         max-width: 400px;
@@ -68,6 +78,11 @@
         left:50%;
         top:50%;
         transform:translateX(-50%) translateY(-50%);
+        height: 100%;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     //variant

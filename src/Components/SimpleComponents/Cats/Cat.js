@@ -45,7 +45,8 @@ const Cat = props => {
                     </g>
                 </svg>
             </div>
-            <Img src={props.urlImg}/>
+            {/* <Img src={props.urlImg}/> */}
+            <div className={'image'} style={{backgroundImage:`url(${urlImg})`}}></div>
         </div>
     );
 }
